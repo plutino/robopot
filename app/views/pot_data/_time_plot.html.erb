@@ -1,0 +1,49 @@
+<%= javascript_tag do %>
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(get_potdata);
+    setInterval(get_potdata, 5000);
+
+    function drawPlot(potdata) {
+        var data = google.visualization.arrayToDataTable(potdata);
+        var options = {
+            title: 'Who emptied the lovely pot?',
+            width: 1000,
+            height: 500,
+            animation: {duration: 400, easing: 'inAndOut'},
+            curveType: 'function'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('plot_div'));
+        chart.draw(data, options);
+    }
+
+    function get_potdata(){
+        jQuery.get("/get_potdata", function(potdata) {
+            drawPlot(potdata.data_array);
+        });
+    };
+
+    function update_range(range){
+        jQuery.get("/get_potdata", {duration: range}, function(potdata) {
+            drawPlot(potdata.data_array);
+        });
+    };
+<% end %>
+
+<td>
+  <table>
+    <tr>
+      <td align="right">
+        <%= button_to_function '30m', "update_range(1800)" %>
+        <%= button_to_function '1H', "update_range(3600)" %>
+        <%= button_to_function '6H', "update_range(21600)" %>
+        <%= button_to_function '12H', "update_range(43200)" %>
+        <%= button_to_function '1D', "update_range(86400)" %>
+        <%= button_to_function '1W', "update_range(604800)" %>
+      </td>
+      </tr>
+    <tr>
+      <td id='plot_div' />
+    </tr>
+  </table>
+</td>

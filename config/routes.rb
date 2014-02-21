@@ -6,6 +6,7 @@ Robopot::Application.routes.draw do
   # first created -> highest priority.
 
   match 'get_level' => 'pot_data#get_level'
+  match 'get_potdata' => 'pot_data#get_potdata'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
