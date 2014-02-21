@@ -1,0 +1,39 @@
+<%= javascript_tag do %>
+     google.load('visualization', '1', {packages:['gauge']});
+     google.setOnLoadCallback(drawChart, 3);
+     function drawChart(level) {
+       var data = google.visualization.arrayToDataTable([
+         ['Label', 'Value'],
+         ['Cups Left', 3.3]
+       ]);
+
+       var options = {
+         width: 500,
+         height: 500,
+         majorTicks: ['0',2,4,6,8,10],
+         minorTicks: 2,
+         min: 0,
+         max: 10,
+         redFrom: 0,
+         redTo: 2,
+         yellowFrom: 2,
+         yellowTo: 8,
+         greenFrom: 8,
+         greenTo: 10
+       };
+
+       var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+       chart.draw(data, options);
+     }
+
+    setInterval(get_level, 5000);
+    function get_level(){
+        jQuery.get("/get_level", function(level_hash) {
+           console.log(level_hash.level);
+           drawChart(level_hash.level);
+        });
+    };
+
+<% end %>
+
+<td id='chart_div' />

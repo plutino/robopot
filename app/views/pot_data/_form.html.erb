@@ -1,0 +1,21 @@
+<%= form_for(@pot_datum) do |f| %>
+  <% if @pot_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pot_datum.errors.count, "error") %> prohibited this pot_datum from being saved:</h2>
+
+      <ul>
+      <% @pot_datum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :level %><br />
+    <%= f.number_field :level %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

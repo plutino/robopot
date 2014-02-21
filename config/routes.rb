@@ -1,6 +1,11 @@
 Robopot::Application.routes.draw do
+  resources :pot_data
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
+
+  match 'get_level' => 'pot_data#get_level'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -48,7 +53,8 @@ Robopot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'pot_data#index'
+
 
   # See how all your routes lay out with "rake routes"
 
