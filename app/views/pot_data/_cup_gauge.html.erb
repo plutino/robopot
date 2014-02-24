@@ -33,9 +33,8 @@
     jQuery.get("/get_level", function(level_hash) {
     console.log(level_hash.level);
     data.setValue(0,1, level_hash.level);
-            chart.draw(data, options);
+    chart.draw(data, options);
 
-    //drawGauge(level_hash.level);
     });
     };
 
