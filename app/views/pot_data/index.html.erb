@@ -1,35 +1,11 @@
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= stylesheet_link_tag 'pot_data' %>
 
+<h1 align='center'>RoboPot</h1>
 
-
-<table>
+<table align='center'>
   <tr>
     <%= render partial: 'cup_gauge' %>
-    <td width=100% > <%= line_chart @data, height: '500px' %> </td>
+    <%= render partial: 'time_plot' %>
   </tr>
 </table>
 
-
-<h1>Listing pot_data</h1>
-
-<table>
-  <tr>
-    <th>Level</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @pot_data.each do |pot_datum| %>
-  <tr>
-    <td><%= pot_datum.level %></td>
-    <td><%= link_to 'Show', pot_datum %></td>
-    <td><%= link_to 'Edit', edit_pot_datum_path(pot_datum) %></td>
-    <td><%= link_to 'Destroy', pot_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Pot datum', new_pot_datum_path %>
